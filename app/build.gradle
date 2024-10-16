@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -46,6 +48,11 @@ android {
     }
 }
 
+// Allow references to generated code
+kapt {
+    correctErrorTypes true
+}
+
 dependencies {
 
     implementation libs.androidx.core.ktx
@@ -63,4 +70,24 @@ dependencies {
     androidTestImplementation libs.androidx.ui.test.junit4
     debugImplementation libs.androidx.ui.tooling
     debugImplementation libs.androidx.ui.test.manifest
+
+    // Hilt
+    implementation libs.dagger.hilt.android
+    kapt libs.hilt.compiler
+
+    // Retrofit
+    implementation libs.retrofit
+    implementation libs.converter.gson
+
+    // Lifecycle
+    implementation libs.androidx.lifecycle.runtime.ktx.v251
+    implementation libs.androidx.lifecycle.viewmodel.ktx
+    implementation libs.androidx.lifecycle.viewmodel.compose
+
+    // Coroutines
+    implementation libs.kotlinx.coroutines.android
+
+    // Network Image
+    implementation libs.coil.compose
+
 }
